@@ -55,16 +55,6 @@ public class BookController {
         service.delete(book);
     }
 
-    @GetMapping
-    public Page<BookDTO> find(BookDTO dto, Pageable pageRequest){
-        Book filter = modelMapper.map( dto, Book.class );
-        Page<Book> page = service.findByExample(filter, pageRequest);
-        List<BookDTO> list = page.getContent().stream()
-                .map(entity -> modelMapper.map(entity, BookDTO.class))
-                .collect(Collectors.toList());
-        return new PageImpl<BookDTO>(list, pageRequest, page.getTotalElements());
-    }
-
     @PutMapping("{id}")
     public BookDTO update( @PathVariable Long id, BookDTO dto){
         return service.getById(id).map( book -> {

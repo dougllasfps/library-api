@@ -115,36 +115,6 @@ public class BookControllerTest {
     }
 
     @Test
-    @DisplayName("Deve filtrar livros.")
-    public void findBooksTest() throws Exception{
-        //cenario (given)
-        Long id = 1l;
-
-        Book book = Book.builder()
-                .id(id)
-                .title(createNewBook().getTitle())
-                .author(createNewBook().getAuthor())
-                .isbn(createNewBook().getIsbn())
-                .build();
-
-        BDDMockito.given( service.findByExample(Mockito.any(Book.class), Mockito.any(Pageable.class
-        )) ).willReturn(new PageImpl(Collections.emptyList(), PageRequest.of(0,10), 0));
-
-        String query = String.format("?title=%s&author=%s&page=1&size=100", book.getTitle(), book.getAuthor());
-
-        //execucao (when)
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .get(BOOK_API.concat(query))
-                .accept(MediaType.APPLICATION_JSON);
-
-        mvc
-                .perform(request)
-                .andExpect(status().isOk())
-                .andExpect( jsonPath("$.", hasSize(1)) )
-        ;
-    }
-
-    @Test
     @DisplayName("Deve obter informacoes de um livro.")
     public void getBookDetailsTest() throws Exception{
         //cenario (given)

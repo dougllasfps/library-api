@@ -18,5 +18,4 @@ public interface BookService {
 
     Book update(Book book);
 
-    Page<Book> findByExample(Book filter, Pageable pageable);
 }
