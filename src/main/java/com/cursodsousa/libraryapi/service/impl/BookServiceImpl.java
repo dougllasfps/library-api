@@ -3,9 +3,7 @@ package com.cursodsousa.libraryapi.service.impl;
 import com.cursodsousa.libraryapi.exception.BusinessException;
 import com.cursodsousa.libraryapi.model.entity.Book;
 import com.cursodsousa.libraryapi.model.repository.BookRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -48,6 +46,18 @@ public class BookServiceImpl implements com.cursodsousa.libraryapi.service.BookS
             throw new IllegalArgumentException("Book id cant be null.");
         }
         return this.repository.save(book);
+    }
+
+    @Override
+    public Page<Book> find( Book filter, Pageable pageRequest ) {
+        Example<Book> example = Example.of(filter,
+                    ExampleMatcher
+                            .matching()
+                            .withIgnoreCase()
+                            .withIgnoreNullValues()
+                            .withStringMatcher( ExampleMatcher.StringMatcher.CONTAINING )
+        ) ;
+        return repository.findAll(example, pageRequest);
     }
 
 }
