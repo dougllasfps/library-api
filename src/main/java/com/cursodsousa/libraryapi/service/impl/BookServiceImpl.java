@@ -62,7 +62,7 @@ public class BookServiceImpl implements com.cursodsousa.libraryapi.service.BookS
 
     @Override
     public Optional<Book> getBookByIsbn(String isbn) {
-        return null;
+        return repository.findByIsbn(isbn);
     }
 
 }
