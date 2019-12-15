@@ -31,9 +31,9 @@ public class LibraryApiApplication {
 	@Bean
 	public CommandLineRunner runner(){
 		return args -> {
-			List<String> emails = Arrays.asList("library-api-831326@inbox.mailtrap.io");
-			emailService.sendMails("Testando serviço de emails.", emails);
-			System.out.println("EMAILS ENVIADOS");
+//			List<String> emails = Arrays.asList("library-api-831326@inbox.mailtrap.io");
+//			emailService.sendMails("Testando serviço de emails.", emails);
+//			System.out.println("EMAILS ENVIADOS");
 		};
 	}
 
