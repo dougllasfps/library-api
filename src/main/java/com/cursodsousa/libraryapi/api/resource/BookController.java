@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -71,7 +72,7 @@ public class BookController {
 
     @PutMapping("{id}")
     @ApiOperation("Updates a book")
-    public BookDTO update( @PathVariable Long id, @Valid BookDTO dto){
+    public BookDTO update( @PathVariable Long id, @RequestBody @Valid BookDTO dto){
         log.info(" updating book of id: {} ", id);
         return service.getById(id).map( book -> {
 
